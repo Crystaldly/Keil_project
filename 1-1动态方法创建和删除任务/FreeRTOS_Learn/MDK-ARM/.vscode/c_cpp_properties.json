@@ -3,20 +3,20 @@
         {
             "name": "freertos_Learn",
             "includePath": [
-                "g:\\code\\Keil_project\\FreeRTOS_Learn\\Inc",
-                "g:\\code\\Keil_project\\FreeRTOS_Learn\\Drivers\\STM32F1xx_HAL_Driver\\Inc",
-                "g:\\code\\Keil_project\\FreeRTOS_Learn\\Drivers\\STM32F1xx_HAL_Driver\\Inc\\Legacy",
-                "g:\\code\\Keil_project\\FreeRTOS_Learn\\Drivers\\CMSIS\\Device\\ST\\STM32F1xx\\Include",
-                "g:\\code\\Keil_project\\FreeRTOS_Learn\\Drivers\\CMSIS\\Include",
-                "g:\\code\\Keil_project\\include",
-                "g:\\code\\Keil_project\\portable\\RVDS\\ARM_CM3",
-                "g:\\code\\Keil_project\\User",
+                "g:\\code\\Keil_project\\1-1动态方法创建和删除任务\\FreeRTOS_Learn\\Inc",
+                "g:\\code\\Keil_project\\1-1动态方法创建和删除任务\\FreeRTOS_Learn\\Drivers\\STM32F1xx_HAL_Driver\\Inc",
+                "g:\\code\\Keil_project\\1-1动态方法创建和删除任务\\FreeRTOS_Learn\\Drivers\\STM32F1xx_HAL_Driver\\Inc\\Legacy",
+                "g:\\code\\Keil_project\\1-1动态方法创建和删除任务\\FreeRTOS_Learn\\Drivers\\CMSIS\\Device\\ST\\STM32F1xx\\Include",
+                "g:\\code\\Keil_project\\1-1动态方法创建和删除任务\\FreeRTOS_Learn\\Drivers\\CMSIS\\Include",
+                "g:\\code\\Keil_project\\1-1动态方法创建和删除任务\\include",
+                "g:\\code\\Keil_project\\1-1动态方法创建和删除任务\\portable\\RVDS\\ARM_CM3",
+                "g:\\code\\Keil_project\\1-1动态方法创建和删除任务\\User",
                 "D:\\Keil_v5\\ARM\\ARMCC\\include",
-                "g:\\code\\Keil_project\\FreeRTOS_Learn\\MDK-ARM",
-                "g:\\code\\Keil_project\\FreeRTOS_Learn\\Src",
-                "g:\\code\\Keil_project\\FreeRTOS_Learn\\Drivers\\STM32F1xx_HAL_Driver\\Src",
-                "g:\\code\\Keil_project\\source",
-                "g:\\code\\Keil_project\\portable\\MemMang"
+                "g:\\code\\Keil_project\\1-1动态方法创建和删除任务\\FreeRTOS_Learn\\MDK-ARM",
+                "g:\\code\\Keil_project\\1-1动态方法创建和删除任务\\FreeRTOS_Learn\\Src",
+                "g:\\code\\Keil_project\\1-1动态方法创建和删除任务\\FreeRTOS_Learn\\Drivers\\STM32F1xx_HAL_Driver\\Src",
+                "g:\\code\\Keil_project\\1-1动态方法创建和删除任务\\source",
+                "g:\\code\\Keil_project\\1-1动态方法创建和删除任务\\portable\\MemMang"
             ],
             "defines": [
                 "USE_HAL_DRIVER",

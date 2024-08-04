@@ -72,7 +72,7 @@ to exclude the API function. */
 //动态任务创建宏
 #define configSUPPORT_DYNAMIC_ALLOCATION 1
 //静态任务创建宏
-#define configSUPPORT_STATIC_ALLOCATION  1
+//#define configSUPPORT_STATIC_ALLOCATION  1
 
 
 /* This is the raw value as per the Cortex-M3 NVIC.  Values can be 255

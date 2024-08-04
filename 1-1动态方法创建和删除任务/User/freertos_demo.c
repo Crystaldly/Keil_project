@@ -5,124 +5,171 @@
 #include "FreeRTOS.h"
 #include "task.h"
 
+
+
+/********************************************???????**************************************************/
+// /* ????? */
+// void vTaskCode( void * pvParameters )
+// {
+//     /* ?ï¿½ï¿½????????1??????????????xTaskCreate()???1??pvParameters??ï¿½ï¿½?????? */
+
+//     configASSERT( ( ( uint32_t ) pvParameters ) == 1 );
+
+//     for( ;; )
+//     {
+//         /* ??????? */
+//     }
+// }
+
+// /* ???????????? */
+// void vOtherFunction( void )
+// {
+//     BaseType_t xReturned;
+//     TaskHandle_t xHandle = NULL;
+
+//     /* ????????ï¿½ï¿½??? */
+//     xReturned = xTaskCreate(
+//                     vTaskCode,       /* ??????????? */
+//                     "NAME",          /* ???????????? */
+//                     STACK_SIZE,      /* ???????ï¿½ï¿½??????ï¿½ï¿½??????????? */
+//                     ( void * ) 1,    /* ????????????? */
+//                     tskIDLE_PRIORITY,/* ?????????????? */
+//                     &xHandle );      /* ?????????????????? */
+
+//     if( xReturned == pdPASS )
+//     {
+//         /* ??????????? ???????????????? */
+//         vTaskDelete( xHandle );
+//     }
+// }
+
 /******************************************************************************************************/
-/*FreeRTOSÅäÖÃ*/
+/*FreeRTOSé…ç½®*/
 
-/* START_TASK ÈÎÎñ ÅäÖÃ
- * °üÀ¨: ÈÎÎñ¾ä±ú ÈÎÎñÓÅÏÈ¼¶ ¶ÑÕ»´óĞ¡ ´´½¨ÈÎÎñ
- */
-#define START_TASK_PRIO         1
-#define START_TASK_STACK_SIZE   128
-//¶¯Ì¬ÈÎÎñ²ÎÊıÅäÖÃ
-TaskHandle_t    start_task_handler;
-void start_task( void * pvParameters );
+/* ä»»åŠ¡å¯åŠ¨å‡½æ•° */
+/* ä»»åŠ¡ï¼šä¼˜å…ˆçº§ã€å †æ ˆå¤§å°ã€å¥æŸ„ã€å‡½æ•°åç§° */
+#define START_TASK_PRIORITY 1
+#define START_TASK_STACK_DEPTH 128
+TaskHandle_t Start_task_handler;
+void Start_Task(void *pvParameters);
 
-//¾²Ì¬ÈÎÎñ²ÎÊıÅäÖÃ
-TaskHandle_t start_static_task_handler;
-StaticTask_t start_task_tcb;
-StackType_t  start_task_stack[START_TASK_STACK_SIZE];
+/* ä»»åŠ¡1å‡½æ•° */
+/* ä»»åŠ¡ï¼šä¼˜å…ˆçº§ã€å †æ ˆå¤§å°ã€å¥æŸ„ã€å‡½æ•°åç§° */
+#define TASK1_PRIORITY 2
+#define TASK1_STACK_DEPTH 128
+TaskHandle_t task1_handler;
+void Task1(void *pvParameters);
 
-/* TASK1 ÈÎÎñ ÅäÖÃ
- * °üÀ¨: ÈÎÎñ¾ä±ú ÈÎÎñÓÅÏÈ¼¶ ¶ÑÕ»´óĞ¡ ´´½¨ÈÎÎñ
- */
-#define TASK1_PRIO         2
-#define TASK1_STACK_SIZE   128
-TaskHandle_t    task1_handler;
-void task1( void * pvParameters );
+/* ä»»åŠ¡2å‡½æ•° */
+/* ä»»åŠ¡ï¼šä¼˜å…ˆçº§ã€å †æ ˆå¤§å°ã€å¥æŸ„ã€å‡½æ•°åç§° */
+#define TASK2_PRIORITY 3
+#define TASK2_STACK_DEPTH 128
+TaskHandle_t task2_handler;
+void Task2(void *pvParameters);
 
-/* TASK2 ÈÎÎñ ÅäÖÃ
- * °üÀ¨: ÈÎÎñ¾ä±ú ÈÎÎñÓÅÏÈ¼¶ ¶ÑÕ»´óĞ¡ ´´½¨ÈÎÎñ
- */
-#define TASK2_PRIO         3
-#define TASK2_STACK_SIZE   128
-TaskHandle_t    task2_handler;
-void task2( void * pvParameters );
+/* ä»»åŠ¡3å‡½æ•° */
+/* ä»»åŠ¡ï¼šä¼˜å…ˆçº§ã€å †æ ˆå¤§å°ã€å¥æŸ„ã€å‡½æ•°åç§° */
+#define TASK3_PRIORITY 4
+#define TASK3_STACK_DEPTH 128
+TaskHandle_t task3_handler;
+void Task3(void *pvParameters);
 
-/* TASK3 ÈÎÎñ ÅäÖÃ
- * °üÀ¨: ÈÎÎñ¾ä±ú ÈÎÎñÓÅÏÈ¼¶ ¶ÑÕ»´óĞ¡ ´´½¨ÈÎÎñ
- */
-#define TASK3_PRIO         4
-#define TASK3_STACK_SIZE   128
-TaskHandle_t    task3_handler;
-void task3( void * pvParameters );
-/******************************************************************************************************/
-
-
-/**
- * @brief       FreeRTOSÀı³ÌÈë¿Úº¯Êı
- * @param       ÎŞ
- * @retval      ÎŞ
- */
+/* å…¥å£å‡½æ•° */
+/*
+* @descriptionï¼šfreertoså…¥å£å‡½æ•°
+* @paramï¼šnone
+* @ret none
+*/
 void freertos_demo(void)
-{    
-    xTaskCreate((TaskFunction_t         )   start_task,
-                (char *                 )   "start_task",
-                (configSTACK_DEPTH_TYPE )   START_TASK_STACK_SIZE,
-                (void *                 )   NULL,
-                (UBaseType_t            )   START_TASK_PRIO,
-                (TaskHandle_t *         )   &start_task_handler );
-
-    start_static_task_handler = xTaskCreateStatic( (TaskFunction_t )   start_task,
-                                                   (char *         )   "start_task", 
-                                                   (uint32_t       )   START_TASK_STACK_SIZE,
-                                                   (void *         )   NULL,
-                                                   (UBaseType_t    )   START_TASK_PRIO,
-                                                   (StackType_t *  )   start_task_stack,
-                                                   (StaticTask_t * )   &start_task_tcb );
+{
+    xTaskCreate( Start_Task,
+                 "Start_Task",
+                 START_TASK_STACK_DEPTH,
+                 NULL,
+                 START_TASK_PRIORITY,
+                 &Start_task_handler);
+    vTaskStartScheduler();    
 }
 
-void start_task( void * pvParameters )
+/* ä»»åŠ¡å¯åŠ¨å‡½æ•° */
+/*
+* @descriptionï¼šä»»åŠ¡å¯åŠ¨å‡½æ•°
+* @paramï¼š*pvParameters
+* @ret none
+*/
+void Start_Task(void *pvParameters)
 {
-    taskENTER_CRITICAL();               /* ½øÈëÁÙ½çÇø */
-    xTaskCreate((TaskFunction_t         )   task1,
-                (char *                 )   "task1",
-                (configSTACK_DEPTH_TYPE )   TASK1_STACK_SIZE,
-                (void *                 )   NULL,
-                (UBaseType_t            )   TASK1_PRIO,
-                (TaskHandle_t *         )   &task1_handler );
+    taskENTER_CRITICAL();               /* è¿›å…¥ä¸´ç•ŒåŒºï¼Œé˜²æ­¢åˆ›å»ºä»»åŠ¡æ—¶è¢«æ‰“æ–­ */
+
+    xTaskCreate( Task1,
+                 "Task1",
+                TASK1_STACK_DEPTH,
+                 NULL,
+                 TASK1_PRIORITY,
+                 &task1_handler);
                 
-    xTaskCreate((TaskFunction_t         )   task2,
-                (char *                 )   "task2",
-                (configSTACK_DEPTH_TYPE )   TASK2_STACK_SIZE,
-                (void *                 )   NULL,
-                (UBaseType_t            )   TASK2_PRIO,
-                (TaskHandle_t *         )   &task2_handler );
-                
-    xTaskCreate((TaskFunction_t         )   task3,
-                (char *                 )   "task3",
-                (configSTACK_DEPTH_TYPE )   TASK3_STACK_SIZE,
-                (void *                 )   NULL,
-                (UBaseType_t            )   TASK3_PRIO,
-                (TaskHandle_t *         )   &task3_handler );
+    xTaskCreate( Task2,
+                 "Task2",
+                TASK2_STACK_DEPTH,
+                 NULL,
+                 TASK2_PRIORITY,
+                 &task2_handler);
+
+    xTaskCreate( Task3,
+                 "Task3",
+                TASK3_STACK_DEPTH,
+                 NULL,
+                 TASK3_PRIORITY,
+                 &task3_handler);
+    
     vTaskDelete(NULL);
-    taskEXIT_CRITICAL();                /* ÍË³öÁÙ½çÇø */
+    taskEXIT_CRITICAL();                  /* ä»»åŠ¡åˆ›å»ºå®Œæˆï¼Œé€€å‡ºä¸´ç•ŒåŒº */
+  
 }
 
-/* ÈÎÎñÒ»£¬ÊµÏÖLED0Ã¿500ms·­×ªÒ»´Î */
-void task1( void * pvParameters )
+/*ä»»åŠ¡å‡½æ•°*/
+
+/* ä»»åŠ¡1å‡½æ•° */
+/*
+* @descriptionï¼šLED1 æ¯10msç¿»è½¬ä¸€æ¬¡
+* @paramï¼š*pvParameters
+* @ret none
+*/
+void Task1(void *pvParameters)
 {
     while(1)
     {
-        HAL_GPIO_TogglePin(GPIOE,GPIO_PIN_4);
-        vTaskDelay(100);
+       HAL_GPIO_TogglePin(LED1_GPIO_Port,LED1_Pin);
+       vTaskDelay(10);
     }
 }
 
-/* ÈÎÎñ¶ş£¬ÊµÏÖLED1Ã¿500ms·­×ªÒ»´Î */
-void task2( void * pvParameters )
+/* ä»»åŠ¡2å‡½æ•° */
+/*
+* @descriptionï¼šLED1 æ¯50msç¿»è½¬ä¸€æ¬¡
+* @paramï¼š*pvParameters
+* @ret none
+*/
+void Task2(void *pvParameters)
 {
     while(1)
     {
-        HAL_GPIO_TogglePin(GPIOE,GPIO_PIN_5);
-        vTaskDelay(100);
+       HAL_GPIO_TogglePin(LED2_GPIO_Port,LED2_Pin);
+       vTaskDelay(50);
     }
 }
 
-void task3( void * pvParameters )
+/* ä»»åŠ¡3å‡½æ•° */
+/*
+* @descriptionï¼šLED1 æ¯100msç¿»è½¬ä¸€æ¬¡
+* @paramï¼š*pvParameters
+* @ret none
+*/
+void Task3(void *pvParameters)
 {
     while(1)
     {
-        HAL_GPIO_TogglePin(GPIOE,GPIO_PIN_6);
-        vTaskDelay(10);
+       HAL_GPIO_TogglePin(LED3_GPIO_Port,LED3_Pin);
+       vTaskDelay(100);
     }
 }

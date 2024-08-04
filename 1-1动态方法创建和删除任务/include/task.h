@@ -351,13 +351,13 @@ typedef enum
  * \defgroup xTaskCreate xTaskCreate
  * \ingroup Tasks
  */
-#if ( configSUPPORT_DYNAMIC_ALLOCATION == 1 )
-    BaseType_t xTaskCreate( TaskFunction_t pxTaskCode,
-                            const char * const pcName, /*lint !e971 Unqualified char types are allowed for strings and single characters only. */
-                            const configSTACK_DEPTH_TYPE usStackDepth,
-                            void * const pvParameters,
-                            UBaseType_t uxPriority,
-                            TaskHandle_t * const pxCreatedTask ) PRIVILEGED_FUNCTION;
+#if ( configSUPPORT_DYNAMIC_ALLOCATION == 1 )/*FreeRTOSConfig.h 中将 configSUPPORT_DYNAMIC_ALLOCATION设置为 1 不设置也可以 默认为1 */
+    BaseType_t xTaskCreate( TaskFunction_t pxTaskCode,                               /* 指向任务函数的指针 */
+                            const char * const pcName,                               /* 任务名字，最大长度configMAX_TASK_NAME_LEN */
+                            const configSTACK_DEPTH_TYPE usStackDepth,               /* 任务堆栈大小，默认单位2字节 */
+                            void * const pvParameters,                               /* 传递给任务函数的参数 */
+                            UBaseType_t uxPriority,                                  /* 任务优先级， 范围：0~configMAX_PRIORITIES - 1 */
+                            TaskHandle_t * const pxCreatedTask ) PRIVILEGED_FUNCTION;/*任务句柄，就是任务的任务控制块*/
 #endif
 
 /**
