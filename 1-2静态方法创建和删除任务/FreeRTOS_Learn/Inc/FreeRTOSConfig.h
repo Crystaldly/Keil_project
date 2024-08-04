@@ -71,9 +71,15 @@ to exclude the API function. */
 
 //动态任务创建宏
 #define configSUPPORT_DYNAMIC_ALLOCATION 1
+
 //静态任务创建宏
 #define configSUPPORT_STATIC_ALLOCATION  1
+/* 软件定时器相关定义 */
+#define configUSE_TIMERS 1                                       /*使能软件定时器，默认：0.为1时需要定义下面3个 */
 
+#define configTIMER_TASK_PRIORITY (configMAX_PRIORITIES - 1)     /* 软件定时器任务的优先级 */
+#define configTIMER_QUEUE_LENGTH 5                               /* 软件定时器命令队列的长度 */
+#define configTIMER_TASK_STACK_DEPTH (configMINIMAL_STACK_SIZE*2)/* 软件定时器任务的堆栈大小 */
 
 /* This is the raw value as per the Cortex-M3 NVIC.  Values can be 255
 (lowest) to 0 (1?) (highest). */

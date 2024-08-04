@@ -2,10 +2,7 @@
 Build target 'freertos_Learn'
 compiling freertos_demo.c...
 linking...
-..\..\Output\freertos_Learn.axf: Error: L6218E: Undefined symbol vApplicationGetIdleTaskMemory (referred from tasks.o).
-Not enough information to list image symbols.
-Not enough information to list load addresses in the image map.
-Finished: 2 information, 0 warning and 1 error messages.
-"..\..\Output\freertos_Learn.axf" - 1 Error(s), 0 Warning(s).
-Target not created.
+Program Size: Code=7084 RO-data=352 RW-data=148 ZI-data=5436  
+FromELF: creating hex file...
+"..\..\Output\freertos_Learn.axf" - 0 Error(s), 0 Warning(s).
 Build Time Elapsed:  00:00:03
