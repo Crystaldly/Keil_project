@@ -161,7 +161,7 @@ void Task2(void *pvParameters)
 
 /* 任务3函数 */
 /*
-* @description：2000ms后挂起任务1
+* @description：2000ms后挂起任务1 3000ms后恢复任务1
 * @param：*pvParameters
 * @ret none
 */
@@ -171,6 +171,10 @@ void Task3(void *pvParameters)
     {
        vTaskDelay(2000);
        vTaskSuspend(task1_handler);
+       vTaskDelay(3000);
+       vTaskResume(task1_handler);
     }
 }
+
+
 
