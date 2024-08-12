@@ -1,0 +1,15 @@
+..\..\output\event_groups.o: ..\..\source\event_groups.c
+..\..\output\event_groups.o: D:\Keil_v5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdlib.h
+..\..\output\event_groups.o: ..\..\include\FreeRTOS.h
+..\..\output\event_groups.o: D:\Keil_v5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stddef.h
+..\..\output\event_groups.o: D:\Keil_v5\ARM\ARM_Compiler_5.06u7\Bin\..\include\stdint.h
+..\..\output\event_groups.o: ../Inc/FreeRTOSConfig.h
+..\..\output\event_groups.o: ..\..\include\projdefs.h
+..\..\output\event_groups.o: ..\..\include\portable.h
+..\..\output\event_groups.o: ..\..\include\deprecated_definitions.h
+..\..\output\event_groups.o: ..\..\portable\RVDS\ARM_CM3\portmacro.h
+..\..\output\event_groups.o: ..\..\include\mpu_wrappers.h
+..\..\output\event_groups.o: ..\..\include\task.h
+..\..\output\event_groups.o: ..\..\include\list.h
+..\..\output\event_groups.o: ..\..\include\timers.h
+..\..\output\event_groups.o: ..\..\include\event_groups.h
